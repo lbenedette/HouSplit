@@ -1,0 +1,33 @@
+version: '2'
+services:
+  web:
+    container_name: web_housplit
+    build:
+      context: ./nginx
+    working_dir: /var/www
+    volumes_from:
+      - app
+    links:
+      - app
+    ports:
+      - 8081:80
+  app:
+    container_name: app_housplit
+    build:
+      context: ./php
+    working_dir: /var/www
+    volumes:
+      - ../application:/var/www
+    links:
+      - db
+  db:
+    container_name: db_housplit
+    image: postgres:9.6
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=housplit"
+      - "POSTGRES_PASSWORD=secret"
+      - "POSTGRES_DB=housplit"
+    ports:
+      - 5433:5432
