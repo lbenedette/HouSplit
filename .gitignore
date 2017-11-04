@@ -8,3 +8,7 @@
 ehthumbs.db
 Thumbs.db
 Desktop.ini
+/application/vendor/
+/application/composer.lock
+/application/.env
+/docker/dbdata/
